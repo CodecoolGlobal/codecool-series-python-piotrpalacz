@@ -20,7 +20,12 @@ def design():
 
 @app.route('/shows/most-rated')
 def show_most_rated():
-    return render_template('shows.html')
+    shows = queries.get_most_rated_shows()
+    return render_template('shows.html', shows=shows)
+
+@app.route('/show/<int:id>')
+def show(id):
+    return render_template('show.html', id=id)
 
 
 def main():

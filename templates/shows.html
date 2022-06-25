@@ -29,27 +29,39 @@
                     <th>Trailer</th>
                     <th>Homepage</th>
 
+
                 </tr>
                 </thead>
                 <tbody>
+                {% for show in shows %}
                 <tr>
                     <td class="action-column">
                         <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
                         <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
                     </td>
-                    <td>Lorem</td>
-                    <td>Ipsum</td>
-                    <td>Dolor</td>
-                    <td>Sit amet</td>
-                    <td>Sit amet</td>
-                    <td>Sit amet</td>
-                    <td>Sit amet</td>
+                    <td> <a href="/show/{{ show.id }}">{{ show.title }}</a> </td>
+                    <td>{{ show.year }}</td>
+                    <td>{{ show.runtime }}</td>
+                    <td>{{ show.rating }}</td>
+                    <td>{{ show.genres }}</td>
+                    {% if show.trailer %}
+                    <td><a target="_blank" href="{{ show.trailer }}">{{ show.trailer }}</a></td>
+                    {% else %}
+                    <td>No URL</td>
+                    {% endif %}
+                    <td>{{ show.homepage }}</td>
 
                 </tr>
-
+                {% endfor %}
                 </tbody>
             </table>
         </div>
+        <div class="card">
+            <div class="pagination">
+                &laquo; <a href="#" class="active">1</a>, 2, 3, 4 &raquo;
+            </div>
+        </div>
+
 
     </section>
     <footer>
