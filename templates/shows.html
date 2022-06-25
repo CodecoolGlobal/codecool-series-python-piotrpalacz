@@ -58,7 +58,23 @@
         </div>
         <div class="card">
             <div class="pagination">
-                &laquo; <a href="#" class="active">1</a>, 2, 3, 4 &raquo;
+            {%  if page_number == 0 %}
+                &laquo;
+            {% else %}
+                <a href="{{ url_for('show_most_rated',page_number=page_number-1) }}">&laquo;</a>
+            {% endif %}
+                {% for n in range(page_count-1) %}
+                    {% if n == page_number %}
+                        <a class="active" href="#"> {{ n + 1 }}</a>
+                    {% else %}
+                        <a  href="{{url_for('show_most_rated',page_number=n)}}"> {{ n + 1 }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% if page_number != page_count-2 %}
+                <a href="{{ url_for('show_most_rated',page_number=page_number + 1) }}">&raquo;</a>
+            {% else %}
+                &raquo;
+            {% endif %}
             </div>
         </div>
 

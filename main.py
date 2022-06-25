@@ -19,9 +19,13 @@ def design():
 
 
 @app.route('/shows/most-rated')
-def show_most_rated():
-    shows = queries.get_most_rated_shows()
-    return render_template('shows.html', shows=shows)
+@app.route('/shows/most-rated/<int:page_number>')
+def show_most_rated(page_number=0):
+    record_per_page = 15
+    shows = queries.get_most_rated_shows(page_number*record_per_page, record_per_page)
+    page_count = queries.get_shows_page_count()[0]
+    return render_template('shows.html', shows=shows, page_count=page_count["page_count"], page_number=page_number)
+
 
 @app.route('/show/<int:id>')
 def show(id):
